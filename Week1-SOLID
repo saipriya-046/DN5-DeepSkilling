@@ -1,10 +1,27 @@
-This repository contains my solutions, hands-on exercises, and learning artifacts for the Cognizant Digital Nurture (DN) 5.0 Deep Skilling Program.
+@@ -0,0 +1,26 @@
+# SOLID Principles
 
-Structure
-Week 1 - Design Patterns and Principles
-Week 2 - Data Structures and Algorithms
-Week 3 - Advanced SQL
-Week 4 - NUnit and Moq
-Week 5 - Entity Framework Core
-Week 6 - ASP.NET Core Web API
-Week 7 - Angular
+## SRP
+Single Responsibility Principle
+
+A class should have only one reason to change.
+
+## OCP
+Open Closed Principle
+
+Open for extension, closed for modification.
+
+## LSP
+Liskov Substitution Principle
+
+Child classes should be replaceable by parent classes.
+
+## ISP
+Interface Segregation Principle
+
+Do not force classes to implement unnecessary methods.
+
+## DIP
+Dependency Inversion Principle
+
+Depend on abstractions, not concrete implementations.
