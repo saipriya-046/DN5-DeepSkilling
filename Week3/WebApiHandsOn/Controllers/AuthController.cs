@@ -14,7 +14,7 @@ namespace WebApiHandsOn.Controllers
     {
         private string GenerateJSONWebToken(int userId, string userRole)
         {
-           var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysuperdupersecretkeythatis32characterslong!"));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysuperdupersecretkeythatis32characterslong!"));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>

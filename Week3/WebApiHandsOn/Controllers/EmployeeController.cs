@@ -12,11 +12,11 @@ namespace WebApiHandsOn.Controllers
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class EmployeeController : ControllerBase
     {
-        private static List<Employee> employees;
+        private static List<Employee> employees = new List<Employee>();
 
         public EmployeeController()
         {
-            if (employees == null)
+            if (employees.Count == 0)
             {
                 employees = GetStandardEmployeeList();
             }
@@ -75,7 +75,7 @@ namespace WebApiHandsOn.Controllers
             existing.Skills = emp.Skills;
             existing.DateOfBirth = emp.DateOfBirth;
 
-            return employees.Where(e => e.Id == id).ToList().FirstOrDefault();
+            return employees.Where(e => e.Id == id).FirstOrDefault() ?? emp;
         }
     }
 }
