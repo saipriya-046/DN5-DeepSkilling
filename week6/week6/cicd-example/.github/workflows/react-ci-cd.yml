@@ -1,0 +1,62 @@
+name: React CI/CD Pipeline
+
+# Runs on every push/PR to main -- this is the "CI" part (Continuous Integration):
+# automatically build + test every change before it's allowed to merge.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- --watchAll=false
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: build/
+
+  # "CD" part (Continuous Deployment) -- only runs after build-and-test succeeds,
+  # and only on pushes to main (not on every PR).
+  deploy:
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: build/
+
+      - name: Deploy (placeholder)
+        run: |
+          echo "Deploy step goes here."
+          echo "Common options: Azure Static Web Apps, Netlify, Vercel, GitHub Pages."
+          echo "Example for Azure Static Web Apps would use:"
+          echo "  Azure/static-web-apps-deploy@v1"

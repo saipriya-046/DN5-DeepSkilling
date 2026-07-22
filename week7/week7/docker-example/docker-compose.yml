@@ -1,0 +1,28 @@
+version: '3.8'
+
+# Example: running the React frontend and a mock backend together.
+# Run with: docker compose up --build
+
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.react
+    ports:
+      - "3000:80"
+
+  angular-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.angular
+    ports:
+      - "4200:80"
+
+  # Example backend placeholder -- swap for your actual ASP.NET Core Web API
+  # once its own Dockerfile exists (from your DN5.0 EF Core / Web API weeks).
+  # api:
+  #   build:
+  #     context: ./api
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5000:80"
